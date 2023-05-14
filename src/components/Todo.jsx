@@ -5,8 +5,10 @@ import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const Container = styled.div`
-  min-height: 60px;
+  height: 60px;
+  max-height: 60px;
   width: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,9 +33,10 @@ const CustomCheckbox = styled.input`
   height: 30px;
   `;
 const TodoContent = styled.p`
-  overflow-wrap: break-word;
-  width: 80%;
-  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 640px;
+  max-width: 640px;
   margin: 10px 20px;
   text-decoration: ${props => props.checked ? 'line-through' : 'none'};
   transition: ${props => props.checked ? 'text-decoration linear 2500ms' : 'none'};

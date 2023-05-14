@@ -141,6 +141,7 @@ export default function App() {
 				await addDoc(collection(db, "todoList"), {
 					todo: todo.trim(),
 					time: inputDate.format("DD/MM/YYYY"),
+					timeStamp: Date.now(),
 					isDone: false
 				})
 			}
@@ -148,6 +149,7 @@ export default function App() {
 				await updateDoc(doc(db, 'todoList', editedItem.id), {
 					todo: todo.trim(),
 					time: inputDate.format("DD/MM/YYYY"),
+					timeStamp: Date.now(),
 					isDone: editedItem.isDone
 				})
 				setIsEdit(false)
@@ -223,14 +225,14 @@ export default function App() {
 					<ListContainer>
 						<ListWrapper>
 							{
-								todoListTest.filter(item => !item.isDone).filter(item => item.time == dateCalendar).map(item => {
+								todoListTest.filter(item => !item.isDone).filter(item => item.time === dateCalendar).sort((a, b) => b.timeStamp - a.timeStamp).map(item => {
 									return <Todo item={item} key={item.id} id={item.id} onClickEdit={() => onClickEdit(item)} />
 								})
 							}
 						</ListWrapper>
 						<ListWrapper>
 							{
-								todoListTest.filter(item => item.isDone).filter(item => item.time == dateCalendar).map(item => {
+								todoListTest.filter(item => item.isDone).filter(item => item.time === dateCalendar).sort((a, b) => b.timeStamp - a.timeStamp).map(item => {
 									return <Todo item={item} key={item.id} id={item.id} onClickEdit={() => onClickEdit(item)} />
 								})
 							}
